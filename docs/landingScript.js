@@ -6,6 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add button click functionality
   document.querySelector('.start-button').addEventListener('click', () => {
     // Replace with the URL of your reading page
-    window.location.href = '/Book/book.html';
+    window.location.href = 'Book/book.html';
   });
 });
