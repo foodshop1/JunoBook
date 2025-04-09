@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="book.css" />
-    <title>Pokemon Magazine</title>
+    <title>Wash Your Hands Juno!</title>
   </head>
 
   <body>
+    <div class="back-button">
+      <a href="../index.html"><img src="images/back.png" alt="" /></a>
+    </div>
     <div class="flipbook">
       <div class="hard">
         <img class="frontcover" src="images/cover_page.png" alt="" />
@@ -16,59 +19,72 @@
 
       <div>
         <img src="images/Page_1_revised.png" alt="" />
-        <small> Page 1 </small>
       </div>
       <div>
         <img src="images/Page_2_v2.png" alt="" />
-        <small> Page 2 </small>
       </div>
-      <div>
+      <div class="page-3">
         <img src="images/Page_3.png" alt="" />
-        <small> Page 3 </small>
       </div>
       <div>
         <img src="images/Page_4.png" alt="" />
-        <small> Page 4 </small>
       </div>
 
-      <div>
+      <div class="page-5">
         <img src="images/Page_5.png" alt="" />
-        <small> Page 5 </small>
       </div>
 
       <div>
         <img src="images/Page_6_v2.png" alt="" />
-        <small> Page 6 </small>
       </div>
 
       <div>
         <img src="images/Page_7_v3.png" alt="" />
-        <small> Page 7 </small>
       </div>
 
-      <div>
+      <div class="page-8">
         <img src="images/Page_8.png" alt="" />
-        <small> Page 8 </small>
       </div>
 
       <div>
         <img src="images/Page_9_v2.png" alt="" />
-        <small> Page 9 </small>
       </div>
 
-      <div>
+      <div class="page-10">
         <img src="images/Page_10_v2.png" alt="" />
-        <small> Page 10 </small>
       </div>
 
-      <div class="hard"></div>
-      <div class="hard">Thank You <small>~ HankTheTank</small></div>
+      <div class="hard">
+        <img class="backcover" src="images/Back_page_v2.png" alt="" />
+      </div>
+      <div class="hard">
+        Thank You
+        <small>~ Karen Quan</small>
+        <small>~ Zaheer Kazi</small>
+        <small>~ Elroy Quan</small>
+      </div>
     </div>
+    <script>
+      window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+      });
+    </script>
 
     <script src="jquery.js"></script>
     <script src="turn.js"></script>
     <script>
       $('.flipbook').turn();
+    </script>
+    <script>
+      document.addEventListener('keydown', function (e) {
+        const flipbook = $('.flipbook');
+
+        if (e.key === 'ArrowRight') {
+          flipbook.turn('next'); // Go to next page
+        } else if (e.key === 'ArrowLeft') {
+          flipbook.turn('previous'); // Go to previous page
+        }
+      });
     </script>
   </body>
 </html>
