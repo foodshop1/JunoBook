@@ -37,24 +37,6 @@ html {
   transition: opacity 2s ease-out, transform 1.5s ease-out;
 }
 
-.tangerine-regular {
-  font-family: 'Tangerine', cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.tangerine-bold {
-  font-family: 'Tangerine', cursive;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.knewave-regular {
-  font-family: 'Knewave', system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
 .content h1 {
   font-size: 3.5rem;
   margin-bottom: 1.5rem;
@@ -98,6 +80,11 @@ html {
 
 .credits p {
   margin: 8px 0;
+}
+
+.content p {
+  margin: 15px 0;
+  font-family: 'Knewave', system-ui;
 }
 
 .loaded .background {
