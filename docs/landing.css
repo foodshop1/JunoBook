@@ -32,9 +32,12 @@ html {
   color: white;
   text-align: center;
   padding-top: 30vh;
+  padding-left: 20px;
+  padding-right: 20px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 2s ease-out, transform 1.5s ease-out;
+  box-sizing: border-box;
 }
 
 .content h1 {
@@ -42,6 +45,7 @@ html {
   margin-bottom: 1.5rem;
   font-family: 'Knewave', system-ui;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1.2;
 }
 
 .start-button {
@@ -76,6 +80,8 @@ html {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
   opacity: 0;
   transition: opacity 2s ease-out;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .credits p {
@@ -98,4 +104,119 @@ html {
 
 .loaded .credits {
   opacity: 1;
+}
+
+/* Tablet Styles */
+@media screen and (max-width: 768px) {
+  .content {
+    padding-top: 25vh;
+  }
+  
+  .content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1.2rem;
+  }
+  
+  .start-button {
+    padding: 10px 25px;
+    font-size: 1.1rem;
+  }
+  
+  .credits {
+    font-size: 1.3rem;
+    bottom: 15px;
+  }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 480px) {
+  .content {
+    padding-top: 20vh;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .content h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  
+  .start-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 25px;
+  }
+  
+  .credits {
+    font-size: 1.1rem;
+    bottom: 10px;
+    padding: 0 15px;
+  }
+  
+  .content p {
+    font-size: 0.9rem;
+    margin: 12px 0;
+  }
+}
+
+/* Small Mobile Styles */
+@media screen and (max-width: 360px) {
+  .content {
+    padding-top: 18vh;
+  }
+  
+  .content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .start-button {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+  
+  .credits {
+    font-size: 1rem;
+  }
+  
+  .content p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Landscape Mobile Styles */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .content {
+    padding-top: 10vh;
+  }
+  
+  .content h1 {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .credits {
+    bottom: 5px;
+    font-size: 1rem;
+  }
+  
+  .content p {
+    margin: 8px 0;
+  }
+}
+
+/* Large Screen Styles */
+@media screen and (min-width: 1200px) {
+  .content h1 {
+    font-size: 4rem;
+  }
+  
+  .start-button {
+    padding: 15px 40px;
+    font-size: 1.3rem;
+  }
+  
+  .credits {
+    font-size: 1.6rem;
+  }
 }
