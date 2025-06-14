@@ -1,6 +1,5 @@
-/* Set a background image – customize this path */
 body {
-  background-image: url('/docs/Book/images/image.png'); /* Replace with your custom image path */
+  background-image: url('/docs/Book/images/image.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
