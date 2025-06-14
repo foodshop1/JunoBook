@@ -97,7 +97,7 @@ body {
 
 /* Mobile Navigation Arrows */
 .mobile-nav {
-  display: none;
+  display: none; /* Hidden by default on desktop */
 }
 
 .nav-arrow {
@@ -178,6 +178,11 @@ body {
   .home-button img {
     width: 25px;
     height: 25px;
+  }
+
+  /* Show mobile navigation on mobile devices */
+  .mobile-nav {
+    display: block;
   }
 
   .mobile-nav .nav-arrow {
