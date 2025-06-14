@@ -3,99 +3,154 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Flipbook</title>
     <link rel="stylesheet" href="book.css" />
-    <title>Wash Your Hands Juno!</title>
+    <script src="page-flip.browser.js"></script>
   </head>
-
   <body>
-    <div id="loader">
-      <img src="images/Loading_icon.gif" alt="Loading..." />
+    <!-- Home Button -->
+    <a href="../index.html" class="home-button" aria-label="Go to home page">
+      <img src="images/back.png" alt="Home" />
+    </a>
+
+    <div class="book-container">
+      <div class="book-wrapper">
+        <div id="book">
+          <div class="page" data-density="hard">
+            <img src="images/cover_page.png" alt="Cover Page" />
+          </div>
+          <div class="page">
+            <img src="images/Page_1_revised.png" alt="Page 1" />
+          </div>
+          <div class="page">
+            <img src="images/Page_2_v2.png" alt="Page 2" />
+          </div>
+          <div class="page">
+            <img src="images/Page_3.png" alt="Page 3" />
+          </div>
+          <div class="page">
+            <img src="images/Page_4.png" alt="Page 4" />
+          </div>
+          <div class="page">
+            <img src="images/Page_5.png" alt="Page 5" />
+          </div>
+          <div class="page">
+            <img src="images/Page_6_v2.png" alt="Page 6" />
+          </div>
+          <div class="page">
+            <img src="images/Page_7_v3.png" alt="Page 7" />
+          </div>
+          <div class="page">
+            <img src="images/Page_8.png" alt="Page 8" />
+          </div>
+          <div class="page">
+            <img src="images/Page_9_v2.png" alt="Page 9" />
+          </div>
+          <div class="page">
+            <img src="images/Page_10_v2.png" alt="Page 10" />
+          </div>
+          <div class="page" data-density="hard">
+            <img src="images/Back_page_v2.png" alt="Back Page" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div class="mobile-nav">
+        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous page">‹</button>
+        <button class="nav-arrow next" id="nextBtn" aria-label="Next page">›</button>
+      </div>
+
+      <!-- Page Indicator -->
+      <div class="page-indicator" id="pageIndicator">
+        <span id="currentPage">1</span> / <span id="totalPages">12</span>
+      </div>
     </div>
-    <div class="back-button">
-      <a href="../index.html"><img src="images/back.png" alt="" /></a>
-    </div>
-    <div class="flipbook">
-      <div class="hard">
-        <img class="frontcover" src="images/cover_page.png" alt="" />
-      </div>
-      <div class="hard"></div>
 
-      <div>
-        <img src="images/Page_1_revised.png" alt="" />
-      </div>
-      <div>
-        <img src="images/Page_2_v2.png" alt="" />
-      </div>
-      <div class="page-3">
-        <img src="images/Page_3.png" alt="" />
-      </div>
-      <div class="page-5">
-        <img src="images/Page_4.png" alt="" />
-      </div>
-
-      <div class="page-5">
-        <img src="images/Page_5.png" alt="" />
-      </div>
-
-      <div>
-        <img src="images/Page_6_v2.png" alt="" />
-      </div>
-
-      <div>
-        <img src="images/Page_7_v3.png" alt="" />
-      </div>
-
-      <div class="page-8">
-        <img src="images/Page_8.png" alt="" />
-      </div>
-
-      <div>
-        <img src="images/Page_9_v2.png" alt="" />
-      </div>
-
-      <div class="page-10">
-        <img src="images/Page_10_v2.png" alt="" />
-      </div>
-
-      <div class="hard">
-        <img class="backcover" src="images/Back_page_v2.png" alt="" />
-      </div>
-      <div class="hard">
-        Thank You
-        <small>~ Karen Quan</small>
-        <small>~ Zaheer Kazi Coutinho</small>
-        <small>~ Elroy Quan</small>
-      </div>
-    </div>
     <script>
-      window.addEventListener('load', () => {
-        // Add loaded class to body for fade-in
-        document.body.classList.add('loaded');
+      window.addEventListener('DOMContentLoaded', () => {
+        const pageFlip = new St.PageFlip(document.getElementById('book'), {
+          width: 360,
+          height: 425,
+          size: 'stretch',
+          minWidth: 350,
+          maxWidth: 700,
+          minHeight: 400,
+          maxHeight: 800,
+          showCover: true,
+          mobileScrollSupport: false,
+        });
 
-        // Handle loader fade-out
-        const loader = document.getElementById('loader');
-        loader.classList.add('fade-out');
+        pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
 
-        // Remove loader after animation
-        setTimeout(() => {
-          loader.style.display = 'none';
-        }, 500);
-      });
-    </script>
+        // Mobile navigation elements
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentPageSpan = document.getElementById('currentPage');
+        const totalPagesSpan = document.getElementById('totalPages');
 
-    <script src="jquery.js"></script>
-    <script src="turn.js"></script>
-    <script>
-      $('.flipbook').turn();
-    </script>
-    <script>
-      document.addEventListener('keydown', function (e) {
-        const flipbook = $('.flipbook');
+        // Set total pages
+        const totalPages = document.querySelectorAll('#book .page').length;
+        totalPagesSpan.textContent = totalPages;
 
-        if (e.key === 'ArrowRight') {
-          flipbook.turn('next');
-        } else if (e.key === 'ArrowLeft') {
-          flipbook.turn('previous');
+        // Update button states and page indicator
+        function updateNavigation() {
+          const currentPage = pageFlip.getCurrentPageIndex();
+          currentPageSpan.textContent = Math.floor(currentPage / 2) + 1;
+
+          prevBtn.disabled = currentPage <= 0;
+          nextBtn.disabled = currentPage >= totalPages - 1;
+        }
+
+        // Mobile arrow controls
+        prevBtn.addEventListener('click', () => {
+          pageFlip.flipPrev();
+        });
+
+        nextBtn.addEventListener('click', () => {
+          pageFlip.flipNext();
+        });
+
+        // Desktop keyboard controls (unchanged)
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') pageFlip.flipNext();
+          if (e.key === 'ArrowLeft') pageFlip.flipPrev();
+        });
+
+        // Listen for page flip events
+        pageFlip.on('flip', updateNavigation);
+        pageFlip.on('changeOrientation', updateNavigation);
+        pageFlip.on('changeState', updateNavigation);
+
+        // Initial navigation update
+        updateNavigation();
+
+        // Touch gesture support for mobile (swipe)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        });
+
+        function handleSwipe() {
+          const swipeThreshold = 50;
+          const swipeDistance = touchEndX - touchStartX;
+
+          if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+              // Swipe right - go to previous page
+              pageFlip.flipPrev();
+            } else {
+              // Swipe left - go to next page
+              pageFlip.flipNext();
+            }
+          }
         }
       });
     </script>
