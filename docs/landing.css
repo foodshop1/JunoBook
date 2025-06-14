@@ -1,16 +1,28 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body,
 html {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 .landing-container {
   position: relative;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .background {
@@ -19,11 +31,13 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/docs/Book/images/image.png'); /* Replace with your image path */
+  background-image: url('/docs/Book/images/image.png');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   opacity: 0.6;
   transition: opacity 1.5s ease-in-out;
+  will-change: opacity;
 }
 
 .content {
@@ -31,68 +45,88 @@ html {
   z-index: 1;
   color: white;
   text-align: center;
-  padding-top: 30vh;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 2rem clamp(1rem, 5vw, 2rem);
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 2s ease-out, transform 1.5s ease-out;
-  box-sizing: border-box;
+  max-width: 90vw;
+  width: 100%;
 }
 
 .content h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
+  font-size: clamp(2rem, 8vw, 4rem);
+  margin-bottom: clamp(1rem, 3vw, 2rem);
   font-family: 'Knewave', system-ui;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  line-height: 1.1;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.content p {
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  margin: clamp(0.8rem, 2vw, 1.5rem) 0;
+  font-family: 'Knewave', system-ui;
+  line-height: 1.4;
 }
 
 .start-button {
   background-color: #ff6b6b;
   color: white;
   border: none;
-  padding: 12px 30px;
-  font-size: 1.2rem;
+  padding: clamp(0.7rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
   border-radius: 30px;
   cursor: pointer;
   font-family: 'Knewave', system-ui;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: clamp(1rem, 3vw, 2rem);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.start-button:hover {
+.start-button:hover,
+.start-button:focus {
   background-color: #ff8787;
   transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+
+.start-button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.start-button:active {
+  transform: scale(0.98);
 }
 
 .credits {
   position: absolute;
-  bottom: 20px;
+  bottom: clamp(0.5rem, 2vh, 1.5rem);
   left: 0;
   width: 100%;
   text-align: center;
   color: white;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
   font-family: 'Knewave', system-ui;
-  line-height: 1;
+  line-height: 1.3;
   z-index: 2;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   opacity: 0;
   transition: opacity 2s ease-out;
-  padding: 0 20px;
-  box-sizing: border-box;
+  padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
 .credits p {
-  margin: 8px 0;
+  margin: clamp(0.3rem, 1vw, 0.8rem) 0;
 }
 
-.content p {
-  margin: 15px 0;
-  font-family: 'Knewave', system-ui;
-}
-
+/* Animation States */
 .loaded .background {
   opacity: 0.8;
 }
@@ -106,117 +140,125 @@ html {
   opacity: 1;
 }
 
-/* Tablet Styles */
-@media screen and (max-width: 768px) {
+/* Tablet Specific Adjustments */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .landing-container {
+    height: 100vh;
+  }
+
   .content {
-    padding-top: 25vh;
-  }
-  
-  .content h1 {
-    font-size: 2.8rem;
-    margin-bottom: 1.2rem;
-  }
-  
-  .start-button {
-    padding: 10px 25px;
-    font-size: 1.1rem;
-  }
-  
-  .credits {
-    font-size: 1.3rem;
-    bottom: 15px;
+    padding: 1.5rem 2rem;
   }
 }
 
-/* Mobile Styles */
-@media screen and (max-width: 480px) {
+/* Mobile Portrait Orientation */
+@media screen and (max-width: 480px) and (orientation: portrait) {
   .content {
-    padding-top: 20vh;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 1rem;
   }
-  
-  .content h1 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-    line-height: 1.1;
-  }
-  
+
   .start-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 25px;
+    width: min(280px, 80vw);
+    margin-top: 1.5rem;
   }
-  
+
   .credits {
-    font-size: 1.1rem;
-    bottom: 10px;
-    padding: 0 15px;
+    padding: 0 1rem;
   }
-  
+}
+
+/* Mobile Landscape Orientation */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .landing-container {
+    height: 100vh;
+  }
+
+  .content {
+    padding: 0.5rem 1rem;
+  }
+
+  .content h1 {
+    margin-bottom: 0.5rem;
+  }
+
   .content p {
-    font-size: 0.9rem;
-    margin: 12px 0;
+    margin: 0.5rem 0;
+  }
+
+  .start-button {
+    margin-top: 0.5rem;
+  }
+
+  .credits {
+    bottom: 0.3rem;
+    font-size: clamp(0.8rem, 2vw, 1rem);
   }
 }
 
-/* Small Mobile Styles */
+/* Small Mobile Devices */
 @media screen and (max-width: 360px) {
   .content {
-    padding-top: 18vh;
+    padding: 1rem 0.5rem;
   }
-  
-  .content h1 {
-    font-size: 1.8rem;
-  }
-  
+
   .start-button {
-    padding: 8px 18px;
-    font-size: 0.9rem;
-  }
-  
-  .credits {
-    font-size: 1rem;
-  }
-  
-  .content p {
-    font-size: 0.85rem;
+    width: min(250px, 85vw);
   }
 }
 
-/* Landscape Mobile Styles */
-@media screen and (max-height: 500px) and (orientation: landscape) {
+/* Ultra-wide Screens */
+@media screen and (min-width: 1400px) {
   .content {
-    padding-top: 10vh;
-  }
-  
-  .content h1 {
-    font-size: 2rem;
-    margin-bottom: 0.8rem;
-  }
-  
-  .credits {
-    bottom: 5px;
-    font-size: 1rem;
-  }
-  
-  .content p {
-    margin: 8px 0;
+    max-width: 1200px;
   }
 }
 
-/* Large Screen Styles */
-@media screen and (min-width: 1200px) {
-  .content h1 {
-    font-size: 4rem;
+/* High DPI / Retina Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .background {
+    background-size: cover;
+    background-attachment: fixed;
   }
-  
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .background,
+  .content,
+  .credits,
   .start-button {
-    padding: 15px 40px;
-    font-size: 1.3rem;
+    transition: none;
   }
-  
-  .credits {
-    font-size: 1.6rem;
+
+  .start-button:hover {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .background {
+    opacity: 0.7;
+  }
+
+  .loaded .background {
+    opacity: 0.9;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .landing-container {
+    height: auto;
+    background: white;
+    color: black;
+  }
+
+  .background {
+    display: none;
+  }
+
+  .start-button {
+    display: none;
   }
 }
