@@ -151,7 +151,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Page indicator for mobile */
+/* page indicator for mobile */
 .page-indicator {
   display: none;
   position: absolute;
@@ -164,6 +164,7 @@ body {
   border-radius: 20px;
   font-size: 14px;
   z-index: 1000;
+  opacity: 0.6;
 }
 
 /* Mobile Responsive Design */
@@ -197,6 +198,7 @@ body {
     max-width: 90%;
   }
 
+  /* css for arrows but i removed them*/
   .nav-arrow {
     width: 45px;
     height: 45px;
@@ -247,5 +249,6 @@ body {
     bottom: 15px;
     font-size: 12px;
     padding: 6px 12px;
+
   }
 }

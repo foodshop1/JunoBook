@@ -55,12 +55,6 @@
         </div>
       </div>
 
-      <!-- Mobile Navigation -->
-      <div class="mobile-nav">
-        <button class="nav-arrow prev" id="prevBtn" aria-label="Previous page">‹</button>
-        <button class="nav-arrow next" id="nextBtn" aria-label="Next page">›</button>
-      </div>
-
       <!-- Page Indicator -->
       <div class="page-indicator" id="pageIndicator">
         <span id="currentPage">1</span> / <span id="totalPages">12</span>
@@ -83,46 +77,34 @@
 
         pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
 
-        // Mobile navigation elements
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+        // elements for page indicator
         const currentPageSpan = document.getElementById('currentPage');
         const totalPagesSpan = document.getElementById('totalPages');
 
-        // Set total pages
+        // set total pages
         const totalPages = document.querySelectorAll('#book .page').length;
         totalPagesSpan.textContent = totalPages;
-
-        // Update button states and page indicator
-        function updateNavigation() {
-          const currentPage = pageFlip.getCurrentPageIndex();
-          currentPageSpan.textContent = Math.floor(currentPage / 2) + 1;
-
-          prevBtn.disabled = currentPage <= 0;
-          nextBtn.disabled = currentPage >= totalPages - 1;
-        }
-
-        // Mobile arrow controls
-        prevBtn.addEventListener('click', () => {
-          pageFlip.flipPrev();
-        });
-
-        nextBtn.addEventListener('click', () => {
-          pageFlip.flipNext();
-        });
-
-        // Desktop keyboard controls
+        
+        // desktop keyboard controls
         document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowRight') pageFlip.flipNext();
-          if (e.key === 'ArrowLeft') pageFlip.flipPrev();
+          if (e.key === 'ArrowRight'){
+            pageFlip.flipNext();
+            const currentPage = pageFlip.getCurrentPageIndex();
+            currentPageSpan.textContent = currentPage + 1;
+          } 
+          if (e.key === 'ArrowLeft'){
+            pageFlip.flipPrev();
+            const currentPage = pageFlip.getCurrentPageIndex();
+            currentPageSpan.textContent = currentPage + 1;
+          } 
         });
 
-        // Listen for page flip events
+        // listen for page flip events
         pageFlip.on('flip', updateNavigation);
         pageFlip.on('changeOrientation', updateNavigation);
         pageFlip.on('changeState', updateNavigation);
 
-        // Initial navigation update
+
         updateNavigation();
       });
     </script>
