@@ -87,8 +87,8 @@
 
         // page indicator counter
         function updateNavigation() {
-          const currentPage = pageFlip.getCurrentPageIndex();
-          currentPageSpan.textContent = Math.floor(currentPage / 2) + 1;
+          const currentPage = pageFlip.getCurrentPageIndex() - 1;
+          currentPageSpan.textContent = currentPage + 1;
         }
 
         // desktop keyboard controls
