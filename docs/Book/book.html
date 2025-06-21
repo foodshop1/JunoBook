@@ -87,11 +87,7 @@
 
         // page indicator counter
         function updateNavigation() {
-
           const currentPage = pageFlip.getCurrentPageIndex();
-          if (currentPage > 0){
-            currentPage = currentPage - 1;
-          }
           currentPageSpan.textContent = currentPage + 1;
         }
 
