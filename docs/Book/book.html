@@ -84,19 +84,17 @@
         // set total pages
         const totalPages = document.querySelectorAll('#book .page').length;
         totalPagesSpan.textContent = totalPages;
-        
+
+        // page indicator counter
+        function updateNavigation() {
+          const currentPage = pageFlip.getCurrentPageIndex();
+          currentPageSpan.textContent = Math.floor(currentPage / 2) + 1;
+        }
+
         // desktop keyboard controls
         document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowRight'){
-            pageFlip.flipNext();
-            const currentPage = pageFlip.getCurrentPageIndex();
-            currentPageSpan.textContent = currentPage + 1;
-          } 
-          if (e.key === 'ArrowLeft'){
-            pageFlip.flipPrev();
-            const currentPage = pageFlip.getCurrentPageIndex();
-            currentPageSpan.textContent = currentPage + 1;
-          } 
+          if (e.key === 'ArrowRight') pageFlip.flipNext();
+          if (e.key === 'ArrowLeft') pageFlip.flipPrev();
         });
 
         // listen for page flip events
